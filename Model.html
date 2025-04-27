@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Queueing Models</title>
+  <link rel="stylesheet" href="../styles.css" type="text/css" />
+</head>
+<body>
+  <div class="all-models">
+    <div class="tab-container">
+      <div class="tabs">
+        <div class="tabs">
+            <button class="tab-button active" data-tab="mm1">M/M/1</button>
+            <button class="tab-button" data-tab="mmc">M/M/C</button>
+            <button class="tab-button" data-tab="mg1">M/G/1</button>
+            <button class="tab-button" data-tab="mgc">M/G/C</button>
+            <button class="tab-button" data-tab="gg1">G/G/1</button>
+            <button class="tab-button" data-tab="ggc">G/G/C</button>
+          </div>
+          
+        <!-- Add more tabs as needed -->
+      
+    </div>
+
+    <!-- MM1 Model -->
+    <div class="container" id="mm1-container">
+      <form id="mm1-form" class="glass-card">
+        <h2>Enter System Parameters (M/M/1)</h2>
+        <div class="input-group">
+          <input type="number" id="lemda" placeholder="Arrival Rate (λ)" step="any" required />
+          <input type="number" id="mue" placeholder="Service Rate (μ)" step="any" required />
+        </div>
+        <button type="submit">Calculate</button>
+      </form>
+
+      <div id="mm1-result-section" class="glass-card" style="display: none;">
+        <h2>📊 System Metrics</h2>
+        <div class="metrics-grid" id="mm1-results-grid"></div>
+      </div>
+    </div>
+
+    <!-- MMC Model -->
+    <div class="container" id="mmc-container" style="display: none;">
+      <form id="mmc-form" class="glass-card">
+        <h2>Enter System Parameters (M/M/C)</h2>
+        <div class="input-group">
+          <input type="number" step="any" id="mmc-lemda" placeholder="Arrival Rate (λ)" required />
+          <input type="number" step="any" id="mmc-meu" placeholder="Service Rate (μ)" required />
+          <input type="number" step="any" id="servers" placeholder="Number of Servers (c)" required />
+        </div>
+        <button type="submit">Calculate</button>
+      </form>
+
+      <div id="mmc-result-section" class="glass-card" style="display: none;">
+        <h2>📊 System Metrics</h2>
+        <div class="metrics-grid" id="mmc-results-grid"></div>
+      </div>
+    </div>
+
+    <!-- --MG1-- -->
+
+    <div class="container" id="mg1-container" style="display: none;">
+        <form class="glass-card" id="mg1-form">
+          <h2>Enter System Parameters</h2>
+          <div class="input-group">
+           
+              <input type="number" step="any" id="mg1-lemda" placeholder="Arrival Rate (λ)" required />
+              <input type="number" step="any" id="mg1-minimum" placeholder="Minimum Service Time" required />
+              <input type="number" step="any" id="mg1-maximum" placeholder="Maximum Service Time" required />
+           
+            
+          </div>
+          <button type="submit">Calculate</button>
+        </form>
+        <div id="mg1-result-section" class="glass-card" style="display: none;">
+          <h3>Results</h3>
+          <div id="mg1-results-grid" class="results-grid"></div>
+        </div>
+        
+    
+        
+
+
+
+
+      </div>
+
+      <!-- --MGc-- -->
+      <div class="container" id="mgc-container" style="display: none;">
+        <form class="glass-card">
+            <h2>Enter System Parameters</h2>
+            <div class="input-group">
+                <input type="number" id="servers" placeholder="Number of Servers (C)" />
+                <input type="number" id="lemda" placeholder="Arrival Rate (λ)" />
+                <input type="number" id="minimum" placeholder="Service Time (Min)" />
+                <input type="number" id="maximum" placeholder="Service Time (Max)" />
+            </div>
+            <button class="btn" type="button" onclick="calculate(event)">Calculate</button>
+        </form>
+      
+        <div class="mgc-results-grid" id="resultCards" style="display: none;">
+            <!-- Cards will appear here -->
+        </div>
+    </div>
+    
+    
+    
+      <!---GG1-->
+
+
+      <div class="container" id="gg1-container" style="display: none;">
+        <form class="glass-card">
+            <h2>Enter System Parameters</h2>
+            <div class="input-group">
+              <input type="number" id="lemda" placeholder="Average Interarrival (λ)" />
+<input type="number" id="minimum" placeholder="Average Service Time" />
+<input type="number" id="varianceArrival" placeholder="Variance of Arrival Time" />
+<input type="number" id="varianceService" placeholder="Variance of Service Time" />
+<input type="number" id="servers" placeholder="Number of Servers (c)" />
+
+
+            </div>
+        </form>
+        <button class="btn" onclick="calculateGG1(event)">Calculate</button>
+    
+        <div class="results grid" id="resultCards" style="display: none;">
+            <!-- Cards will appear here -->
+        </div>
+    </div>
+    
+    
+
+
+    <div class="container" id="ggc-container" style="display: none;">
+      <form class="glass-card" onsubmit="calculateGGC(event)">
+        <h2>Enter G/G/c System Parameters</h2>
+        <div class="input-group">
+          <input type="number" id="ggc-lemda" placeholder="Average Interarrival (λ)" step="any" />
+          <input type="number" id="ggc-minimum" placeholder="Average Service Time" step="any" />
+          <input type="number" id="ggc-varianceArrival" placeholder="Variance of Arrival Time" step="any" />
+          <input type="number" id="ggc-varianceService" placeholder="Variance of Service Time" step="any" />
+          <input type="number" id="ggc-servers" placeholder="Number of Servers (c)" min="1" />
+        </div>
+        <button class="btn" type="submit">Calculate</button>
+      </form>
+    
+      <div class="ggc-results-grid" id="resultCards" style="display: none;">
+        <!-- Metric cards will be injected here -->
+      </div>
+    </div>
+    
+
+
+
+    
+
+
+  </div>
+
+  <script src="../Components/index.js"></script>
+  <footer class="site-footer">
+    <p>&copy; 2025 All Rights Reserved</p>
+  </footer>
+</body>
+</html>
